@@ -1,0 +1,51 @@
+<a-layout class="layout">
+   <!-- 标题栏, 用户信息 -->
+   <a-layout-header class="layout-header">
+    <!-- 折叠图标样式 -->
+    <a-icon class="layout-header__icon" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="collapsed = !collapsed"/>
+    <!-- 面包屑 -->
+    <a-breadcrumb class="layout-header__title">
+      <a-breadcrumb-item>
+        <a @click="goBackHomePage">首页</a>
+      </a-breadcrumb-item>
+      <a-breadcrumb-item v-for="(item, index) in breadCrumbList" :key="index">{{ item }}</a-breadcrumb-item>
+    </a-breadcrumb>
+    <!-- 后续菜单扩展信息 -->
+    <div class="layout-header__menu"></div>
+    <!-- 用户及系统管理信息 -->
+    <a-dropdown class="layout-header__settings">
+      <span> 管理员 </span>
+      <a-menu slot="overlay">
+        <a-menu-item divided>
+          <span @click.prevent="logOut">退出登录</span>
+        </a-menu-item>
+      </a-menu>
+    </a-dropdown>
+  </a-layout-header>
+
+  <a-layout>
+    <!-- layout sider -->
+    <a-layout-sider v-model="collapsed" :collapsed-width="64">
+      <!-- 菜单栏 -->
+      <layout-menu :options="getRoutes" :collapsed="collapsed" @change="change"></layout-menu>
+    </a-layout-sider>
+
+    <a-layout>
+       <!-- 路由标签页 -->
+      <reuse-tab></reuse-tab>
+      <!-- 页面内容部分 -->
+      <a-layout-content class="layout-content">
+        <!-- 页面切换动画 -->
+        <transition name="layout-content" mode="out-in">
+          <!-- 控制页面内容是否缓存 -->
+          <keep-alive :include="cachedViews">
+            <!-- router content -->
+            <router-view :key="getRoute" />
+          </keep-alive>
+        </transition>
+        <!-- Iframe 标签 -->
+        <IframeBox v-if="iframesEnable"></IframeBox>
+      </a-layout-content>
+    </a-layout>
+  </a-layout>
+</a-layout>

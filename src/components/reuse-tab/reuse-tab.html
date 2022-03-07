@@ -1,0 +1,13 @@
+<div class="reuse-tab">
+  <router-link v-for="tag in visitedViews" ref="tag" :key="tag.path" class="reuse-tab__item" :to="tag.path" tag="span"
+    @click.middle.native="!isAffix(tag) && closeSelectedTag(tag)" @contextmenu.prevent.native="openMenu(tag, $event)">
+    {{ tag.title }}
+    <template v-if="tag.badge > 0">({{ tag.badge }})</template>
+    <a-icon v-if="!tag.affix" type="close" @click.prevent.stop="closeSelectedTag(tag)" />
+  </router-link>
+  <ul v-show="visible" :style="{left: left + 'px', top: top + 'px'}" class="contextmenu">
+    <li @click="refreshTag(selectedTag)">刷 新</li>
+    <li v-if="!isAffix(selectedTag) && visitedViews.length > 1" @click="closeSelectedTag(selectedTag)">关 闭</li>
+    <li @click="closeOthersTags">关闭其它</li>
+  </ul>
+</div>

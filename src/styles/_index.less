@@ -1,0 +1,56 @@
+@--light-blue: #3a71a8;
+
+@--default-color: #f0f2f5;
+
+.ms-body__main {
+  background-color: @--default-color;
+  padding: 8px;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.ms-form__main {
+  .ant-form-item {
+    margin-bottom: 8px;
+  }
+}
+
+.ms-card__main {
+  .ant-card-head {
+    background-color: rgba(215, 215, 215, 1);
+    border-bottom: none;
+    .ant-card-head-title {
+      padding: 16px 0 8px;
+      .ms-card__header {
+        padding: 10px 30px 10px;
+        background-color: #fff;
+        user-select: none;
+      }
+    }
+  }
+}
+
+.ms-tip__main {
+  border-left: 3px solid @--light-blue;
+  padding: 0px 8px;
+  font-size: 16px;
+  line-height: 36px;
+}
+
+.ant-card-body {
+  padding: 8px;
+}
+
+.ant-calendar-picker {
+  width: 100%;
+}
+
+.ms-option__increase {
+  .ant-select-dropdown-menu {
+    li.ant-select-dropdown-menu-item {
+      padding: 4px;
+    }
+  }
+}
